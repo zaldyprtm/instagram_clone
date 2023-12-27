@@ -44,11 +44,13 @@
     color: white;
     background-color: #3897f0;
     border-radius: 5px;
+    font-weight: 700;
 }
 
 .instagram-container-inside h5{
-    color: #C0C0C0;
+    color: #6e6868;
     text-align: center;
+    font-weight: 900;
 }
 
 .instagram-container-inside input[type=email],input[type=text],input[type=password]{
@@ -68,6 +70,11 @@
     color: #b3acac;
     text-align: center;
     font-weight: 600;
+}
+
+.instagram-container-inside button:hover{
+    cursor: pointer;
+    background-color: #256bac;
 }
 
 .instagram-bottom-container{
@@ -117,4 +124,51 @@
 
 #appstore:hover{
     cursor: pointer;
+}
+
+.footer{
+    margin-top: 80px;
+}
+
+.instagram-footer a{
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+    left: 260px;
+    text-align: center;
+    font-size: 12px;
+    color: #574b4b;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.instagram-footer a:hover{
+    text-decoration: underline;
+    color: #3897f0;
+}
+
+.copyright {
+    margin-top: 20px;
+    margin: 5px;
+}
+
+.copyright p, select{
+    margin-top: 10px;
+    margin-bottom: 70px;
+    display: inline-block;
+    position: relative;
+    transform: translate(540px);
+    font-size: 12px;
+    color: #6e6868;
+    text-align: center;
+}
+
+.copyright select:hover{
+    cursor: pointer;
+    outline: none;
+
+}
+
+#Lang   {
+    outline: none;
 }
