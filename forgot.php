@@ -6,41 +6,38 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="assets/ig.png">
     <script src="https://kit.fontawesome.com/a363c6a721.js" crossorigin="anonymous"></script>
-    <title>Login Instagram</title>
+    <title>Reset password</title>
 </head>
 <body>
 
+    <!-- reset_password.php -->
 <?php
 
-    require("./connection.php");
- 
-    if (isset($_POST['login_button'])) {
-        $_SESSION['validate'] = false;
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        
-        // Prepare the SQL query using placeholders
-        $p = crud::conect()->prepare('SELECT * FROM crudtable WHERE username = :u AND pass = :p');
-        
-        // Bind the parameters using bindValue()
-        $p->bindValue(':u', $username); // Corrected parameter binding syntax
-        $p->bindValue(':p', $password); // Corrected parameter binding syntax
-        
-        $p->execute();
-        $d = $p->fetchAll(PDO::FETCH_ASSOC);
-        
-        if ($p->rowCount() > 0) {
-            $_SESSION['username'] = $username;
-            $_SESSION['pass'] = $password;
-            $_SESSION['validate'] = true;
-            echo 'Logged Successfully';
-            header("location: index.php");
-            exit(); // Add exit to stop further script execution after redirection
-        } else {
-            echo 'Make sure that you are registered';
-        }
-    }
+require('./connection.php');
 
+// Fungsi untuk mengirim email reset password
+function sendResetEmail($email, $resetLink) {
+    // Di sini Anda bisa menggunakan fungsi mail() atau pustaka PHPMailer
+    // untuk mengirim email reset password dengan tautan yang dibuat
+    // Contoh sederhana:
+    $subject = "Reset Your Password";
+    $message = "Hello,\n\nPlease click on the following link to reset your password:\n$resetLink\n\nThank you.";
+    // Mail($email, $subject, $message);
+    echo "Password reset instructions have been sent to $email";
+}
+
+session_start(); // Start session if not started already
+
+if (isset($_POST['reset_password'])) {
+    // Ambil email dari formulir
+    $email = $_POST['email'];
+
+    // Di sini Anda dapat menulis logika untuk membuat tautan reset password yang unik
+    $resetLink = "https://example.com/reset_password?token=yourtoken"; // Ganti dengan tautan yang sesuai
+
+    // Kirim email dengan tautan reset password
+    sendResetEmail($email, $resetLink);
+}
 ?>
 
 
@@ -48,15 +45,13 @@
         <div class="instagram-logo">
             <img src="assets/instagram-logo.png" alt="logo">
         </div>
-
+        <div class="title-reset">
+            <h3>reset password</h3>
+        </div>
         <div class="instagram-container-inside">
-            <form action="" method="post">
-            <input type="text" name="username" placeholder="Phone number, Username, or email">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Login" name="login_button">
-            <h5><hr>OR</h5>
-            <button><i class="fa-brands fa-facebook fa-fade fa-xl"></i>&nbsp; Login With Facebook</button>
-            <a href="forgot.php">Forgot password?</a>
+            <form action="" method="POST">
+            <input type="email" name="email" placeholder="Phone number, Username, email">
+            <input type="submit" value="Reset" name="reset_password">
             </form>
         </div>
         </div>
