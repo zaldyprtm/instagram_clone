@@ -15,15 +15,15 @@
 
     if (isset($_POST['login_button'])) {
         $_SESSION['validate']=false;
-        $username=$_POST['username'];
+        $email=$_POST['email'];
         $password=$_POST['password'];
-        $p=crud::conect()->prepare('SELECT * FROM crudtable WHERE username=:u and pass=:p');  
-        $p->bindValue(':u, $username');
+        $p=crud::conect()->prepare('SELECT * FROM crudtable WHERE email=:e and pass=:p');  
+        $p->bindValue(':e, $');
         $p->bindValue(':p, $password');
         $p->execute();
         $d=$p->fetchAll(PDO::FETCH_ASSOC);
         if ($p->rowCount()>0) {
-            $_SESSION['username']=$username;
+            $_SESSION['email']=$email;
             $_SESSION['pass']=$password;
             $_SESSION['validate']=true;
             header('location:index.php');
@@ -46,7 +46,7 @@
 
         <div class="instagram-container-inside">
             <form action="" method="post">
-            <input type="text" name="username" placeholder="Phone number, Username, or email">
+            <input type="email" name="email" placeholder="Phone number, Username, or email">
             <input type="password" name="password" placeholder="Password">
             <input type="submit" value="Login" name="login_button">
             <h5><hr>OR</h5>
